@@ -34,8 +34,9 @@ The pipeline follows a structured three-stage process to ensure data quality:
 
 1. **Ingestion:** A REST API Webhook receives data from external sources.
 2. **Validation:** An internal node compares the payload against the `user_signup.json` schema.
-3. **Routing:** * **Valid Data:** Proceed to the database or analytical dashboard.
-    * **Invalid Data:** Trigger an error log and notify the research team.
+3. **Routing:**
+   * **Valid Data:** Proceed to the database or analytical dashboard.
+   * **Invalid Data:** Trigger an error log and notify the research team.
 
 ## 4. JSON Schema Specification
 The schema defines the "source of truth" for user data. It enforces data types, string formats (like emails), and required fields.
