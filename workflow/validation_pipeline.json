@@ -1,1 +1,22 @@
+import jsonschema
 
+schema = {
+    "type": "object",
+    "properties": {
+        "user_id": {"type": "integer"},
+        "email": {"type": "string", "format": "email"},
+        "plan": {"type": "string", "enum": ["Free", "Pro", "Enterprise"]}
+    },
+    "required": ["user_id", "email"]
+}
+
+payload = items[0]['json']
+
+try:
+    jsonschema.validate(instance=payload, schema=schema)
+    payload['isValid'] = True
+except Exception as e:
+    payload['isValid'] = False
+    payload['validationError'] = str(e)
+
+return [{"json": payload}]
