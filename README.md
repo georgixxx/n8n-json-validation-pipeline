@@ -29,9 +29,7 @@ This approach ensures that all data stored in the system follows a predefined bu
 
 ## 3. System Architecture
 The pipeline follows a structured three-stage process to ensure data quality:
-
-![Automated Data Validation Pipeline Architecture](assets/architecture diagram.png)
-
+![Automated Data Validation Pipeline Architecture](assets/architecture%20diagram.png)
 *Figure 1: High-level system architecture showing the flow of data from ingestion through validation logic to final routing.*
 
 
