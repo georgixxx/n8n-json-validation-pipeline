@@ -86,4 +86,15 @@ def validate_data(payload, schema):
 4. **Activate Webhook:** Copy the Webhook URL provided by n8n and configure your data source to send JSON payloads to that address.
 
 ---
-**Back to [Main Portfolio Website](https://yourusername.github.io/technical-portfolio/)**
+---
+
+## Feel free to reach out for further discussion
+[cite_start]Feel free to reach out for further discussions regarding this pipeline or other data engineering projects. [cite: 8, 20]
+
+* [cite_start]**LinkedIn:** [Brightone Onyango](https://www.linkedin.com/in/brightone-onyango-109614263) [cite: 7]
+* [cite_start]**GitHub:** [georgixxx](https://github.com/georgixxx) [cite: 1, 3]
+* **Email:** [georgebrixomuga@gmail.com](mailto:georgebrixomuga@gmail.com)
+* [cite_start]**Portfolio:** [georgixxx.github.io](https://georgixxx.github.io) 
+
+---
+**[Back to Main Portfolio Website](https://georgixxx.github.io)**
