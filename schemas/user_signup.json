@@ -1,1 +1,22 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User Signup Schema",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "integer",
+      "description": "Unique identifier for the user."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Primary contact email."
+    },
+    "plan": {
+      "type": "string",
+      "enum": ["Free", "Pro", "Enterprise"],
+      "description": "The subscription tier selected by the user."
+    }
+  },
+  "required": ["user_id", "email"]
+}
