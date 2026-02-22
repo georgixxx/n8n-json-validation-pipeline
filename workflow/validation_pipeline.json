@@ -1,22 +1,73 @@
-import jsonschema
-
-schema = {
-    "type": "object",
-    "properties": {
-        "user_id": {"type": "integer"},
-        "email": {"type": "string", "format": "email"},
-        "plan": {"type": "string", "enum": ["Free", "Pro", "Enterprise"]}
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "data-validation-endpoint",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
     },
-    "required": ["user_id", "email"]
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import jsonschema\n\nschema = {\n    \"type\": \"object\",\n    \"properties\": {\n        \"user_id\": {\"type\": \"integer\"},\n        \"email\": {\"type\": \"string\", \"format\": \"email\"},\n        \"plan\": {\"type\": \"string\", \"enum\": [\"Free\", \"Pro\", \"Enterprise\"]}\n    },\n    \"required\": [\"user_id\", \"email\"]\n}\n\npayload = items[0]['json']\n\ntry:\n    jsonschema.validate(instance=payload, schema=schema)\n    payload['isValid'] = True\nexcept Exception as e:\n    payload['isValid'] = False\n    payload['validationError'] = str(e)\n\nreturn [{\"json\": payload}]"
+      },
+      "name": "Validate JSON Schema",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isValid }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "name": "Is Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "notice": "Data successfully validated and moved to production."
+      },
+      "name": "Success Path",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [910, 200]
+    },
+    {
+      "parameters": {
+        "notice": "Data rejected. Error logged for review."
+      },
+      "name": "Error Path",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [910, 400]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{"node": "Validate JSON Schema", "type": "main", "index": 0}]]
+    },
+    "Validate JSON Schema": {
+      "main": [[{"node": "Is Valid?", "type": "main", "index": 0}]]
+    },
+    "Is Valid?": {
+      "main": [
+        [{"node": "Success Path", "type": "main", "index": 0}],
+        [{"node": "Error Path", "type": "main", "index": 0}]
+      ]
+    }
+  }
 }
-
-payload = items[0]['json']
-
-try:
-    jsonschema.validate(instance=payload, schema=schema)
-    payload['isValid'] = True
-except Exception as e:
-    payload['isValid'] = False
-    payload['validationError'] = str(e)
-
-return [{"json": payload}]
