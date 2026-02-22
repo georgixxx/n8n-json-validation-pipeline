@@ -89,7 +89,7 @@ def validate_data(payload, schema):
 ---
 
 ## Feel free to reach out for further discussion
-[cite_start]Feel free to reach out for further discussions regarding this pipeline or other data engineering projects. [cite: 8, 20]
+Feel free to reach out for further discussions regarding this pipeline or other data engineering projects.
 
 * **LinkedIn:** [Brightone Onyango](https://www.linkedin.com/in/brightone-onyango-109614263)
 * **GitHub:** [georgixxx](https://github.com/georgixxx)
